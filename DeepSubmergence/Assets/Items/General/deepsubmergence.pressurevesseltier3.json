@@ -11,13 +11,17 @@
 	"squishFactor": 0,
 	"value": 10,
 	"dimensions": [
-        "XXXXXX",
-        "X    X",
-        "X    X",
-        "X    X",
-        "X    X",
-        "X    X",
-        "XXXXXX",
+		"XXXXXX",
+		"X    X",
+		"X    X",
+		"X    X",
+		"X    X",
+		"X    X",
+		"XXXXXX"
 	],
+	"itemType": "EQUIPMENT",
+	"moveMode": "INSTALL",
+	"canBeDiscardedByPlayer": true,
+	"canBeSoldInBulkAction": false,
 	"damageMode": "OPERATION"
 }

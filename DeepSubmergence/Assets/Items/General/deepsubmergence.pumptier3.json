@@ -3,17 +3,21 @@
 	"itemDescriptionKey": "deepsubmergence.pumptier3.desc",
 	"sprite": "deepsubmergence.iconpumptier3",
 	"itemColor": {
-		"r": 58,
-		"g": 40,
-		"b": 32,
+		"r": 49,
+		"g": 49,
+		"b": 49,
 		"a": 255
 	},
 	"squishFactor": 0,
 	"value": 50,
 	"dimensions": [
-        "XX",
-        "XX",
+		"XX",
+		"XX",
 		"XX"
 	],
+	"itemType": "EQUIPMENT",
+	"moveMode": "INSTALL",
+	"canBeDiscardedByPlayer": true,
+	"canBeSoldInBulkAction": false,
 	"damageMode": "OPERATION"
 }
