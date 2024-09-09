@@ -22,7 +22,7 @@ namespace DeepSubmergence {
         
         void Start(){
             try {
-                cachedSubmarinePlayer = DeepSubmergence.instance.submarinePlayer.GetComponent<SubmarinePlayer>();
+                cachedSubmarinePlayer = DeepSubmergence.Instance.submarinePlayer.GetComponent<SubmarinePlayer>();
                 
                 GameObject parent = GameObject.Find(HARVESTABLE_POIS_PARENT_NAME);
                 

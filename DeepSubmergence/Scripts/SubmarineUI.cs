@@ -24,7 +24,7 @@ namespace DeepSubmergence {
         
         void Start(){
             try {
-                cachedSubmarinePlayer = DeepSubmergence.instance.submarinePlayer.GetComponent<SubmarinePlayer>();
+                cachedSubmarinePlayer = DeepSubmergence.Instance.submarinePlayer.GetComponent<SubmarinePlayer>();
                 
                 // Setup button and arrow UI
                 ribbonUI = GetComponent<Image>();

@@ -74,7 +74,7 @@ namespace DeepSubmergence {
             
             // Manually manage lifetime
             GameObject.DontDestroyOnLoad(newObject);
-            DeepSubmergence.instance.managedObjects.Add(newObject);
+            DeepSubmergence.Instance.managedObjects.Add(newObject);
             return newObject;
         }
         //######################################################################
@@ -88,7 +88,7 @@ namespace DeepSubmergence {
             
             // Manually manage lifetime
             GameObject.DontDestroyOnLoad(newObject);
-            DeepSubmergence.instance.managedObjects.Add(newObject);
+            DeepSubmergence.Instance.managedObjects.Add(newObject);
             return newObject;
         }
         //######################################################################
@@ -118,7 +118,7 @@ namespace DeepSubmergence {
 
             // Manually manage lifetime
             GameObject.DontDestroyOnLoad(newObject);
-            DeepSubmergence.instance.managedObjects.Add(newObject);
+            DeepSubmergence.Instance.managedObjects.Add(newObject);
             return newObject;
         }
         //######################################################################
@@ -158,7 +158,7 @@ namespace DeepSubmergence {
             
             // Manually manage lifetime
             GameObject.DontDestroyOnLoad(newObject);
-            DeepSubmergence.instance.managedObjects.Add(newObject);
+            DeepSubmergence.Instance.managedObjects.Add(newObject);
             return newObject;
         }
         //######################################################################

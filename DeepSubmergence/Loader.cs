@@ -6,9 +6,7 @@ namespace DeepSubmergence {
         // This method is run by Winch to initialize your mod
         public static void Initialize()
         {
-            var gameObject = new GameObject(nameof(DeepSubmergence));
-            gameObject.AddComponent<DeepSubmergence>();
-            GameObject.DontDestroyOnLoad(gameObject);
+            GameObject.DontDestroyOnLoad(new GameObject(nameof(DeepSubmergence), typeof(DeepSubmergence)));
         }
     }
 }

@@ -91,7 +91,7 @@ namespace DeepSubmergence {
         
         void Start(){
             try {
-                cachedDredgePlayer = DeepSubmergence.instance.dredgePlayer;
+                cachedDredgePlayer = DeepSubmergence.Instance.dredgePlayer;
                 cachedDredgePlayerPlayer = cachedDredgePlayer.GetComponent<Player>();
                 
                 submarineMesh = GetComponent<MeshRenderer>();

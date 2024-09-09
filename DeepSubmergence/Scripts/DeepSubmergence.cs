@@ -8,10 +8,8 @@ using Winch.Core.API;
 using UnityEngine.AI;
 
 namespace DeepSubmergence {
-    public class DeepSubmergence : MonoBehaviour {
+    public class DeepSubmergence : USingleton<DeepSubmergence> {
 
-        public static DeepSubmergence instance;
-        
         // [/] Make dialogue only progress with certain buttons (match existing - only mouse)
         
         // V0.4 bugs & feedback fixes
@@ -45,9 +43,11 @@ namespace DeepSubmergence {
         public List<GameObject> managedObjects = new();
         
         private bool setup;
-        
-        void Awake(){
-            instance = this;
+
+        protected override bool ShouldNotDestroyOnLoad => true;
+
+        protected override void Awake(){
+            base.Awake();
             WinchCore.Log.Debug("mod loaded");
 
             SeaBaseDock.Initialize();
