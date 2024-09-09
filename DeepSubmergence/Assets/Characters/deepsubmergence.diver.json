@@ -1,0 +1,27 @@
+﻿{
+	"speakerNameKey": "deepsubmergence.diver.title",
+	"portraitSprite": "deepsubmergence.uidiver0",
+	"smallPortraitSprite": "deepsubmergence.smalldiver",
+	"alwaysAvailable": false,
+	"yarnRootNode": "DeepSubmergence_Diver_Chat",
+	"portraitOverrideConditions": [
+		{
+			"portraitSprite": "deepsubmergence.uidiver1",
+			"useManualState": true,
+			"stateName": "deepsubmergence.diver.portrait-state",
+			"stateValue": 1
+		},
+		{
+			"portraitSprite": "deepsubmergence.uidiver2",
+			"useManualState": true,
+			"stateName": "deepsubmergence.diver.portrait-state",
+			"stateValue": 2
+		},
+		{
+			"portraitSprite": "deepsubmergence.uidiver3",
+			"useManualState": true,
+			"stateName": "deepsubmergence.diver.portrait-state",
+			"stateValue": 3
+		}
+	]
+}

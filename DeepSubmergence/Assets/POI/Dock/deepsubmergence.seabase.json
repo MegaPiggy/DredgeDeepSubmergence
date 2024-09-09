@@ -1,0 +1,41 @@
+{
+	"dockData": "deepsubmergence.seabase",
+	"location": {
+		"x": 730.89,
+		"y": 0,
+		"z": -276.46
+	},
+	"vCam": {
+		"x": 5,
+		"y": 12.5,
+		"z": -12.5
+	},
+	"lookAtTarget": {
+		"x": 4.11,
+		"y": -5.7,
+		"z": 4.46
+	},
+	"boatActions": {
+		"x": 0,
+		"y": 1,
+		"z": 0
+	},
+	"storage": {
+		"enabled": false
+	},
+	"destinations": [],
+	"dockSlots": [
+		{
+			"position": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"rotation": {
+				"x": 0,
+				"y": 35,
+				"z": 0
+			}
+		}
+	]
+}

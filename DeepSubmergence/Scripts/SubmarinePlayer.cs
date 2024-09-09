@@ -178,11 +178,10 @@ namespace DeepSubmergence {
         
         private void UpdateInputs(){
             CannotDiveReason cannotDiveReason = Utils.CanDive();
-            bool inFakeDock = DeepSubmergence.instance.seaBaseFakeDock.playerInFakeDock;
             
             if((cannotDiveReason & CannotDiveReason.InDock) != CannotDiveReason.None){
                 onSurface = true;
-            } else if(cannotDiveReason == CannotDiveReason.None && !inFakeDock){
+            } else if(cannotDiveReason == CannotDiveReason.None){
                 if(Input.GetKeyDown(KeyCode.Q)){
                     onSurface = !onSurface;
                 }
@@ -289,15 +288,14 @@ namespace DeepSubmergence {
             
             // Set a timer after it's cleared so you don't get back from fishing at 0 time left
             bool currentlyFishing = Utils.CanDive() != CannotDiveReason.None;
-            bool inFakeDock = DeepSubmergence.instance.seaBaseFakeDock.playerInFakeDock;
             
-            if(currentlyFishing || inFakeDock){
+            if(currentlyFishing){
                 doneFishingTimer.Start();
             }
             
             if(onSurface){
                 currentDiveTime = Mathf.Max(currentDiveTime - (Time.deltaTime * SURFACE_FILL_RATE), 0.0f);
-            } else if(doneFishingTimer.Finished() && !inFakeDock){
+            } else if(doneFishingTimer.Finished()){
                 currentDiveTime += Time.deltaTime;
             }
             

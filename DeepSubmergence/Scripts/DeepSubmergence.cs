@@ -4,6 +4,8 @@ using UnityEngine;
 using Winch.Core;
 using Winch.Util;
 using System;
+using Winch.Core.API;
+using UnityEngine.AI;
 
 namespace DeepSubmergence {
     public class DeepSubmergence : MonoBehaviour {
@@ -30,11 +32,14 @@ namespace DeepSubmergence {
         // [x] Cover art for game start? Just a fullscreen splash on a canvas, not 3D backgroundy
         // [x] Play it a shitload, bugtest, etc.
         
+        public static readonly ModAssembly ModAssembly = ModAssemblyLoader.GetCurrentMod();
+
+        public static readonly string AssetsPath = ModAssembly.AssetsPath;
+
         public GameObject dredgePlayer;
         public GameObject submarinePlayer;
         public GameObject submarineUI;
         public GameObject underwaterFishableManager;
-        public SeaBaseFakeDock seaBaseFakeDock;
         public GameObject debugAxes;
 
         public List<GameObject> managedObjects = new();
@@ -44,7 +49,8 @@ namespace DeepSubmergence {
         void Awake(){
             instance = this;
             WinchCore.Log.Debug("mod loaded");
-            
+
+            SeaBaseDock.Initialize();
             ModelUtil.Initialize();
         }
         
@@ -163,17 +169,12 @@ namespace DeepSubmergence {
                 TextureUtil.GetTexture("deepsubmergence.seabaseemittexture")
             );
             
-            seaBaseWindows.transform.parent = seaBase.transform;
+            seaBaseWindows.transform.SetParent(seaBase.transform, false);
             seaBaseWindows.transform.localPosition = Vector3.zero;
             
             // Position the sea base model
             seaBase.transform.position = new Vector3(735.0f, -5.7f, -272.0f);
             seaBase.transform.rotation = Quaternion.Euler(0.0f, 125.0f, 0.0f);
-
-            // Setup sea base fake dock
-            GameObject fakeDockObject = Utils.SetupGameObject("Sea Base Fake Dock");
-            fakeDockObject.transform.position = new Vector3(730.89f, 0.0f, -276.46f);
-            seaBaseFakeDock = fakeDockObject.AddComponent<SeaBaseFakeDock>();
         }
     }
 }

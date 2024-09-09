@@ -17,32 +17,23 @@ namespace Winch.Util
         
         public static void Initialize(){
             WinchCore.Log.Debug("Loading model assets...");
-                        
-            string[] modDirs = Directory.GetDirectories("Mods");
-            foreach (string modDir in modDirs)
+
+            string assetFolderPath = Path.Combine(DeepSubmergence.DeepSubmergence.AssetsPath, "Models");
+
+            if (!Directory.Exists(assetFolderPath)) return;
+
+            string[] modelFiles = Directory.GetFiles(assetFolderPath);
+            foreach (string file in modelFiles)
             {
-                if(modDir.Contains("DeepSubmergence")){
-                    string assetFolderPath = Path.Combine(Path.Combine(modDir, "Assets"), "Models");
-                    
-                    if (!Directory.Exists(assetFolderPath)){
-                        continue;
-                    }
-                    
-                    string[] modelFiles = Directory.GetFiles(assetFolderPath);
-                    foreach (string file in modelFiles)
-                    {
-                        try
-                        {
-                            LoadModelFromFile(file);
-                        }
-                        catch(Exception ex)
-                        {
-                            WinchCore.Log.Error($"Failed to load texture file {file}: {ex}");
-                        }
-                    }
+                try
+                {
+                    LoadModelFromFile(file);
+                }
+                catch (Exception ex)
+                {
+                    WinchCore.Log.Error($"Failed to load model file {file}: {ex}");
                 }
             }
-            
         }
 
         public static Mesh GetModel(string key)

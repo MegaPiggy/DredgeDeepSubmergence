@@ -15,7 +15,6 @@ namespace DeepSubmergence {
         InDock      = 1 << 2,
         Fishing     = 1 << 3,
         PauseMenu   = 1 << 4,
-        InFakeDock  = 1 << 5,
         // Probably more things
     }
     
@@ -191,7 +190,6 @@ namespace DeepSubmergence {
             if(cachedPlayer.IsDocked) { reason |= CannotDiveReason.InDock; }
             if(cachedPlayer.IsFishing){ reason |= CannotDiveReason.Fishing; }
             if(cachedInnerSettingsPanel.activeSelf){ reason |= CannotDiveReason.PauseMenu; }
-            if(DeepSubmergence.instance.seaBaseFakeDock.playerInFakeDock){ reason |= CannotDiveReason.InFakeDock; }
             
 
             return reason;

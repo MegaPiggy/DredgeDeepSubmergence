@@ -1,0 +1,90 @@
+﻿﻿title: DeepSubmergence_Diver_Root
+---
+<<LogWarn "Diver Root">>
+<<if GetHasVisitedNode("DeepSubmergence_Diver_Quest0") == false>>
+	<<LogWarn "Diver Quest0">>
+	<<jump DeepSubmergence_Diver_Quest0>>
+<<endif>>
+
+<<LogWarn "Diver Update Progress">>
+<<UpdateDeepSubmergenceProgress>>
+
+<<if GetHasVisitedNode("DeepSubmergence_Diver_Quest1") == false>>
+	<<LogWarn "Diver Quest1">>
+	<<if GetDeepSubmergenceProgress() == 1>>
+		<<jump DeepSubmergence_Diver_Quest1>>
+	<<endif>>
+<<endif>>
+
+<<if GetHasVisitedNode("DeepSubmergence_Diver_Quest2") == false>>
+	<<LogWarn "Diver Quest2">>
+	<<if GetDeepSubmergenceProgress() == 2>>
+		<<jump DeepSubmergence_Diver_Quest2>>
+	<<endif>>
+<<endif>>
+
+<<if GetHasVisitedNode("DeepSubmergence_Diver_Quest3") == false>>
+	<<LogWarn "Diver Quest3">>
+	<<if GetDeepSubmergenceProgress() == 3>>
+		<<jump DeepSubmergence_Diver_Quest3>>
+	<<endif>>
+<<endif>>
+
+<<if GetHasVisitedNode("DeepSubmergence_Diver_QuestDone") == false>>
+	<<LogWarn "Diver QuestDone">>
+	<<if GetDeepSubmergenceProgress() >= 4>>
+		<<jump DeepSubmergence_Diver_QuestDone>>
+	<<endif>>
+<<endif>>
+===
+﻿title: DeepSubmergence_Diver_Chat
+---
+deepsubmergence.diver: ... #line:deepsubmergence.chatdialogue0
+===
+﻿title: DeepSubmergence_Diver_Quest0
+---
+<<SetSpeakerAvailability deepsubmergence.diver true>>
+deepsubmergence.diver: Ah... what ill fate dragged you to these depths, to this... place? #aah #line:deepsubmergence.quest0dialogue0
+deepsubmergence.diver: But, no matter. I need something from you. A favor, if you will. #line:deepsubmergence.quest0dialogue1
+deepsubmergence.diver: I was stationed here, once, until some of my research... slipped away. #line:deepsubmergence.quest0dialogue2
+deepsubmergence.diver: There was a small bolting fish, a squid caught in a net, and a shoal... so many hungry mouths. #line:deepsubmergence.quest0dialogue3
+deepsubmergence.diver: Don’t fret. They won't rot. They never rot. #line:deepsubmergence.quest0dialogue4
+deepsubmergence.diver: Keep them... close... until you bring them to me. Return here when you have them all... and... everything will be... #line:deepsubmergence.quest0dialogue5
+===
+﻿title: DeepSubmergence_Diver_Quest1
+---
+deepsubmergence.diver: That's... that's them. You-you found them. But how did...? #line:deepsubmergence.quest1dialogue0
+deepsubmergence.diver: When they... when they sent me down here, I was... elated. So elated. They'd given me... everything I wanted #line:deepsubmergence.quest1dialogue1
+deepsubmergence.diver: Free reign... to test... to discover... to create... #line:deepsubmergence.quest1dialogue2
+deepsubmergence.diver: Take this. Here. Blueprints... for reinforcing your hull. For... for pushing out the water. The water that seeps in when you dive too deep. #line:deepsubmergence.quest1dialogue3
+deepsubmergence.diver: But... but this isn’t everything. No... no, there’s more. More out there... #line:deepsubmergence.quest1dialogue4
+deepsubmergence.diver: A wriggling shock... a glowing crawler... a bleeding slice of iron... and a needle’s tip. So sharp... so sharp... #line:deepsubmergence.quest1dialogue5
+===
+﻿title: DeepSubmergence_Diver_Quest2
+---
+deepsubmergence.diver: Take it. More blueprints. Deeper... always deeper... ever deeper. #line:deepsubmergence.quest2dialogue0
+deepsubmergence.diver: They warned us, didn’t they? You know, you remember. #line:deepsubmergence.quest2dialogue1
+deepsubmergence.diver: Alone, down here. Alone. No one to watch, to track... to make sure... To check on. #line:deepsubmergence.quest2dialogue2
+deepsubmergence.diver: It was just a thought. A research grant, they said. Research. Endless hours... smearing... into forever. #line:deepsubmergence.quest2dialogue3
+deepsubmergence.diver: More. I need more. #line:deepsubmergence.quest2dialogue4
+deepsubmergence.diver: A fish with an battered mask. An explosive thing, stitched in agony. A crushing maw... shredding... tearing. #line:deepsubmergence.quest2dialogue5
+===
+﻿title: DeepSubmergence_Diver_Quest3
+---
+deepsubmergence.diver: Yes, yes, these. My children, almost perfect, almost ready for providence. #line:deepsubmergence.quest3dialogue0
+deepsubmergence.diver: Take these blueprints and dive, deeper. We're so close to touching it. Touching the abyss. #line:deepsubmergence.quest3dialogue1
+deepsubmergence.diver: The agency, said no, it's not there, it's not under, you CAN'T GO THERE! #line:deepsubmergence.quest3dialogue2
+<<AutoResolveNextLine>>
+deepsubmergence.diver: ... #line:deepsubmergence.quest3dialogue3
+<<wait 1>>
+deepsubmergence.diver: One more. #line:deepsubmergence.quest3dialogue4
+deepsubmergence.diver: A bleached machine to cut and break through. Gnawing at the shell of reality. #line:deepsubmergence.quest3dialogue5
+===
+﻿title: DeepSubmergence_Diver_QuestDone
+---
+<<SetSpeakerAvailability deepsubmergence.diver false>>
+<<AutoResolveNextLine>>
+deepsubmergence.diver: ... #line:deepsubmergence.questdonedialogue0
+<<wait 1>>
+deepsubmergence.diver: The corpse twitches and siezes, like machinery. Was it ever even alive? #line:deepsubmergence.questdonedialogue1
+===

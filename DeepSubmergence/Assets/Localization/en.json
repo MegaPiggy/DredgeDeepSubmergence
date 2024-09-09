@@ -21,33 +21,34 @@
     "deepsubmergence.shoal.desc": "It moves as one, thinks as one, and eats as many.",
     "deepsubmergence.trenchwhale.name": "Flayed Whale",
     "deepsubmergence.trenchwhale.desc": "Although the machinery continues to grind, the animal is long dead. May as well give it some dignity in death.",
-    
+
     "deepsubmergence.floodwater.name": "Flooding Water",
     "deepsubmergence.floodwater.desc": "A minor annoyance. Water is automatically dried when docking, or can be drained while at sea using Pumps.",
-    
+
     "deepsubmergence.pumptier1.name": "Low-Quality Pump",
     "deepsubmergence.pumptier1.desc": "Removes flooding water very slowly",
     "deepsubmergence.pumptier2.name": "Straining Pump",
     "deepsubmergence.pumptier2.desc": "Removes flooding water at a medium rate",
     "deepsubmergence.pumptier3.name": "Pressurized Pump",
     "deepsubmergence.pumptier3.desc": "Removes flooding water quickly",
-    
+
     "deepsubmergence.pressurevesseltier1.name": "Thin Pressure Vessel",
     "deepsubmergence.pressurevesseltier1.desc": "Adds a small amount of time to how long you can remain submerged.",
     "deepsubmergence.pressurevesseltier2.name": "Thick Pressure Vessel",
     "deepsubmergence.pressurevesseltier2.desc": "Adds a reasonable amount of time to how long you can remain submerged.",
     "deepsubmergence.pressurevesseltier3.name": "Double-Hulled Pressure Vessel",
     "deepsubmergence.pressurevesseltier3.desc": "Adds a good deal of time to how long you can remain submerged.",
-    
-    "deepsubmergence.questdivertitle": "Hollow Diver",
-    
+
+    "deepsubmergence.seabase.name": "Sea Base",
+    "deepsubmergence.diver.title": "Hollow Diver",
+
     "deepsubmergence.quest0dialogue0": "Ah... what ill fate dragged you to these depths, to this... place?",
     "deepsubmergence.quest0dialogue1": "But, no matter. I need something from you. A favor, if you will.",
     "deepsubmergence.quest0dialogue2": "I was stationed here, once, until some of my research... slipped away.",
     "deepsubmergence.quest0dialogue3": "There was a small bolting fish, a squid caught in a net, and a shoal... so many hungry mouths.",
     "deepsubmergence.quest0dialogue4": "Don’t fret. They won't rot. They never rot.",
     "deepsubmergence.quest0dialogue5": "Keep them... close... until you bring them to me. Return here when you have them all... and... everything will be...",
-    
+
     "deepsubmergence.quest1dialogue0": "That's... that's them. You-you found them. But how did...?",
     "deepsubmergence.quest1dialogue1": "When they... when they sent me down here, I was... elated. So elated. They'd given me... everything I wanted",
     "deepsubmergence.quest1dialogue2": "Free reign... to test... to discover... to create...",
@@ -61,14 +62,14 @@
     "deepsubmergence.quest2dialogue3": "It was just a thought. A research grant, they said. Research. Endless hours... smearing... into forever.",
     "deepsubmergence.quest2dialogue4": "More. I need more.",
     "deepsubmergence.quest2dialogue5": "A fish with an battered mask. An explosive thing, stitched in agony. A crushing maw... shredding... tearing.",
-    
+
     "deepsubmergence.quest3dialogue0": "Yes, yes, these. My children, almost perfect, almost ready for providence.",
     "deepsubmergence.quest3dialogue1": "Take these blueprints and dive, deeper. We're so close to touching it. Touching the abyss.",
     "deepsubmergence.quest3dialogue2": "The agency, said no, it's not there, it's not under, you CAN'T GO THERE!",
     "deepsubmergence.quest3dialogue3": "...",
     "deepsubmergence.quest3dialogue4": "One more.",
     "deepsubmergence.quest3dialogue5": "A bleached machine to cut and break through. Gnawing at the shell of reality.",
-    
+
     "deepsubmergence.questdonedialogue0": "...",
-    "deepsubmergence.questdonedialogue1": "The corpse twitches and siezes, like machinery. Was it ever even alive?",
+    "deepsubmergence.questdonedialogue1": "The corpse twitches and siezes, like machinery. Was it ever even alive?"
 }
