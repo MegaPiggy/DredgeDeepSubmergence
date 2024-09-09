@@ -2,13 +2,11 @@ using UnityEngine.UI;
 using UnityEngine;
 using Winch.Core;
 using System.Collections.Generic;
-using System.Linq;
-using System;
-using Sirenix.OdinInspector;
-using Winch.Serialization.Item;
+using Winch.Util;
+using Winch.Components;
 
 namespace DeepSubmergence {
-    
+
     public enum CannotDiveReason : int {
         None        = 0,
         TabMenuOpen = 1 << 1,
@@ -99,24 +97,25 @@ namespace DeepSubmergence {
         // Helper function for quick-setting up a gameobject with a model and
         // default material
         //######################################################################
-        private const string DEFAULT_SHADER_NAME = "Shader Graphs/Lit_Shader";
-        private const string DEFAULT_TEXTURE_PROP = "Texture2D_9aa7ba2263944b48bbf43c218dc48459";
-        
-        public static GameObject SetupModelTextureAsGameObject(string name, Mesh mesh, Texture texture){
+        public static GameObject SetupModelTextureAsGameObject(string name, Mesh mesh, Texture texture = null, Texture emitTexture = null, float emitStrength = 4, bool turnOffEmitDuringDay = false, Texture flickerTexture = null, bool recieveShadows = false)
+        {
             GameObject newObject = new GameObject();
             newObject.name = "[DeepSubmergence] " + name;
             
             // Setup mesh, texture, material
             MeshFilter newMeshFilter = newObject.AddComponent<MeshFilter>();
             newMeshFilter.mesh = mesh;
-            
+
             // Setup material with texture
-            Material newMaterial = new Material(Shader.Find(DEFAULT_SHADER_NAME));
-            newMaterial.SetTexture(DEFAULT_TEXTURE_PROP, texture);
-            
+            Material newMaterial = AssetBundleUtil.CreateLitMaterial(name, texture, emitTexture, emitStrength, turnOffEmitDuringDay, flickerTexture, recieveShadows);
+
             MeshRenderer newMeshRenderer = newObject.AddComponent<MeshRenderer>();
             newMeshRenderer.material = newMaterial;
-            
+
+            SpecificShaderReplacer shaderReplacer = newObject.AddComponent<SpecificShaderReplacer>();
+            shaderReplacer.renderer = newMeshRenderer;
+            shaderReplacer.shader = newMaterial.shader.name;
+
             // Manually manage lifetime
             GameObject.DontDestroyOnLoad(newObject);
             DeepSubmergence.instance.managedObjects.Add(newObject);

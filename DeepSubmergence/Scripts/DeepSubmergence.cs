@@ -166,7 +166,9 @@ namespace DeepSubmergence {
             GameObject seaBaseWindows = Utils.SetupModelTextureAsGameObject(
                 "Sea Base Windows",
                 ModelUtil.GetModel("deepsubmergence.seabasewindows"),
-                TextureUtil.GetTexture("deepsubmergence.seabaseemittexture")
+                TextureUtil.GetTexture("deepsubmergence.seabasetexture"),
+                TextureUtil.GetTexture("deepsubmergence.seabaseemittexture"),
+                2
             );
             
             seaBaseWindows.transform.SetParent(seaBase.transform, false);
