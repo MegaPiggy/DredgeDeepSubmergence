@@ -125,6 +125,7 @@ namespace DeepSubmergence {
             submarinePlayer = Utils.SetupModelTextureAsGameObject(
                 "SubmarinePlayer",
                 ModelUtil.GetModel("deepsubmergence.submarine"),
+                false,
                 TextureUtil.GetTexture("deepsubmergence.submarinetexture")
             );
 
@@ -134,8 +135,7 @@ namespace DeepSubmergence {
         private void SetupDebugAxes(){
             debugAxes = Utils.SetupModelTextureAsGameObject(
                 "Debug Axes",
-                ModelUtil.GetModel("deepsubmergence.debugaxes"),
-                null
+                ModelUtil.GetModel("deepsubmergence.debugaxes")
             );
             
             debugAxes.transform.position = new Vector3(0.0f, -1000.0f, 0.0f);
@@ -161,11 +161,13 @@ namespace DeepSubmergence {
             GameObject seaBase = Utils.SetupModelTextureAsGameObject(
                 "Sea Base",
                 ModelUtil.GetModel("deepsubmergence.seabase"),
+                true,
                 TextureUtil.GetTexture("deepsubmergence.seabasetexture")
             );
             GameObject seaBaseWindows = Utils.SetupModelTextureAsGameObject(
                 "Sea Base Windows",
                 ModelUtil.GetModel("deepsubmergence.seabasewindows"),
+                true,
                 TextureUtil.GetTexture("deepsubmergence.seabasetexture"),
                 TextureUtil.GetTexture("deepsubmergence.seabaseemittexture"),
                 2
@@ -173,7 +175,15 @@ namespace DeepSubmergence {
             
             seaBaseWindows.transform.SetParent(seaBase.transform, false);
             seaBaseWindows.transform.localPosition = Vector3.zero;
-            
+
+            // Setup nav mash obstacle
+            GameObject navMeshObstacleObject = Utils.SetupGameObject("Sea Base Nav Mesh Obstacle");
+            navMeshObstacleObject.transform.SetParent(seaBase.transform, false);
+            navMeshObstacleObject.transform.localPosition = new Vector3(2.25f, 0.0f, 0.875f);
+            navMeshObstacleObject.transform.localScale = Vector3.one * 18.0f;
+            NavMeshObstacle navMeshObstacle = navMeshObstacleObject.AddComponent<NavMeshObstacle>();
+            navMeshObstacle.shape = NavMeshObstacleShape.Capsule;
+
             // Position the sea base model
             seaBase.transform.position = new Vector3(735.0f, -5.7f, -272.0f);
             seaBase.transform.rotation = Quaternion.Euler(0.0f, 125.0f, 0.0f);

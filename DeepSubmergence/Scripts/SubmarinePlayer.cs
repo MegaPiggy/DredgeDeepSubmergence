@@ -106,6 +106,7 @@ namespace DeepSubmergence {
                 propeller = Utils.SetupModelTextureAsGameObject(
                     "Submarine Propeller",
                     ModelUtil.GetModel("deepsubmergence.submarinepropeller"),
+                    false,
                     TextureUtil.GetTexture("deepsubmergence.propellertexture")
                 );
                 propeller.transform.parent = transform;

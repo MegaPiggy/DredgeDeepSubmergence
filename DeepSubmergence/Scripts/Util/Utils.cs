@@ -96,10 +96,9 @@ namespace DeepSubmergence {
         // Helper function for quick-setting up a gameobject with a model and
         // default material
         //######################################################################
-        public static GameObject SetupModelTextureAsGameObject(string name, Mesh mesh, Texture texture = null, Texture emitTexture = null, float emitStrength = 4, bool turnOffEmitDuringDay = false, Texture flickerTexture = null, bool recieveShadows = false)
+        public static GameObject SetupModelTextureAsGameObject(string name, Mesh mesh, bool collidable = false, Texture texture = null, Texture emitTexture = null, float emitStrength = 4, bool turnOffEmitDuringDay = false, Texture flickerTexture = null, bool recieveShadows = false)
         {
-            GameObject newObject = new GameObject();
-            newObject.name = "[DeepSubmergence] " + name;
+            GameObject newObject = new GameObject("[DeepSubmergence] " + name);
             
             // Setup mesh, texture, material
             MeshFilter newMeshFilter = newObject.AddComponent<MeshFilter>();
@@ -114,6 +113,15 @@ namespace DeepSubmergence {
             SpecificShaderReplacer shaderReplacer = newObject.AddComponent<SpecificShaderReplacer>();
             shaderReplacer.renderer = newMeshRenderer;
             shaderReplacer.shader = newMaterial.shader.name;
+
+            if (collidable)
+            {
+                GameObject newColliderObject = new GameObject("[DeepSubmergence] " + name + " Collider");
+                newColliderObject.transform.SetParent(newObject.transform, false);
+                newColliderObject.layer = Layer.CollidesWithPlayer;
+                MeshCollider collider = newColliderObject.AddComponent<MeshCollider>();
+                collider.sharedMesh = mesh;
+            }
 
             // Manually manage lifetime
             GameObject.DontDestroyOnLoad(newObject);
