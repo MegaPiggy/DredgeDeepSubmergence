@@ -39,7 +39,7 @@
     "deepsubmergence.pressurevesseltier3.name": "Double-Hulled Pressure Vessel",
     "deepsubmergence.pressurevesseltier3.desc": "Adds a good deal of time to how long you can remain submerged.",
 
-    "deepsubmergence.seabase.name": "Sea Base",
+    "deepsubmergence.seabase": "Sea Base",
     "deepsubmergence.diver.title": "Hollow Diver",
 
     "deepsubmergence.quest0dialogue0": "Ah... what ill fate dragged you to these depths, to this... place?",
