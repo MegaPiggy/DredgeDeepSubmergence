@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DredgeGameLibs" Version="1.5.2" />
     <PackageReference Include="Winch" Version="0.5.0" />
   </ItemGroup>
 

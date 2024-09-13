@@ -1,4 +1,5 @@
 ﻿{
 	"dockNameKey": "deepsubmergence.seabase",
+	"yarnRootNode": "DeepSubmergence_Diver_Root",
 	"speakers": [ "deepsubmergence.diver" ]
 }

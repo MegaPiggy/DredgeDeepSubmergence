@@ -6,6 +6,8 @@ using Winch.Util;
 using System;
 using Winch.Core.API;
 using UnityEngine.AI;
+using Winch.Data.Shop;
+using System.Linq;
 
 namespace DeepSubmergence {
     public class DeepSubmergence : USingleton<DeepSubmergence> {
@@ -66,6 +68,7 @@ namespace DeepSubmergence {
 
             try {
                 // Instantiate all the objects needed for the mod
+                SetupTravellingMerchant();
                 SetupSubmarinePlayer();
                 SetupDebugAxes();
                 SetupDiveUI();
@@ -116,9 +119,44 @@ namespace DeepSubmergence {
             for(int i = 0, count = managedObjects.Count; i < count; ++i){
                 Destroy(managedObjects[i]);
             }
+        }
+
+        private void SetupTravellingMerchant(){
+
+            var gridShopJunk = GameManager.Instance.SaveData.GetGridByKey(GridKey.TRAVELLING_MERCHANT_MATERIALS);
+            var gridConfigurationShopJunk = gridShopJunk.gridConfiguration;
+            gridConfigurationShopJunk.mainItemType |= ItemType.EQUIPMENT;
+            gridConfigurationShopJunk.mainItemSubtype |= Enums.PUMP;
+            gridConfigurationShopJunk.mainItemSubtype |= Enums.PRESSURE_VESSEL;
+            gridShopJunk.Init(gridConfigurationShopJunk, false);
             
-            // Kick off a restart waiting for player
-            StartCoroutine(Start());
+            var shipyards = DockUtil.GetAllShipyardDestinations().Where(shipyard => shipyard.marketTabs.Any(marketTab => marketTab.gridKey == GridKey.TRAVELLING_MERCHANT_MATERIALS));
+            foreach (var shipyard in shipyards)
+            {
+                shipyard.itemSubtypesBought |= Enums.PUMP;
+                shipyard.itemSubtypesBought |= Enums.PRESSURE_VESSEL;
+            }
+            var shopJunk = ShopUtil.GetShopData("TM_Junk");
+            shopJunk.dialogueLinkedShopData.Add(new ShopData.DialogueLinkedShopData
+            {
+                itemData = new List<ShopData.ShopItemData>{
+                    new ModdedShopItemData("deepsubmergence.pumptier1"),
+                    new ModdedShopItemData("deepsubmergence.pumptier2"),
+                    new ModdedShopItemData("deepsubmergence.pumptier3")
+                },
+                dialogueNodes = new List<string> { "DeepSubmergence_Diver_Root" },
+                requireMode = ShopData.DialogueLinkedShopData.RequireMode.ALL
+            });
+            shopJunk.dialogueLinkedShopData.Add(new ShopData.DialogueLinkedShopData
+            {
+                itemData = new List<ShopData.ShopItemData>{
+                    new ModdedShopItemData("deepsubmergence.pressurevesseltier1"),
+                    new ModdedShopItemData("deepsubmergence.pressurevesseltier2"),
+                    new ModdedShopItemData("deepsubmergence.pressurevesseltier3")
+                },
+                dialogueNodes = new List<string> { "DeepSubmergence_Diver_Root" },
+                requireMode = ShopData.DialogueLinkedShopData.RequireMode.ALL
+            });
         }
         
         private void SetupSubmarinePlayer(){

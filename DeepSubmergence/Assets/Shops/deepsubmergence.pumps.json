@@ -1,0 +1,4 @@
+﻿{
+    "gridKey": "SEA_BASE_PUMPS",
+    "alwaysInStock": [ "deepsubmergence.pumptier1", "deepsubmergence.pumptier2", "deepsubmergence.pumptier3" ]
+}

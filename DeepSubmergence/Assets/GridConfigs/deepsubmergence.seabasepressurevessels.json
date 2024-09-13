@@ -1,0 +1,7 @@
+{
+    "gridKey": "SEA_BASE_PRESSURE_VESSELS",
+    "columns": 8,
+    "rows": 9,
+    "mainItemType": "EQUIPMENT",
+    "mainItemSubtype": [ "PRESSURE_VESSEL" ]
+}

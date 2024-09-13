@@ -15,6 +15,7 @@
 		"X"
 	],
 	"itemType": "EQUIPMENT",
+	"itemSubtype": "PUMP",
 	"moveMode": "INSTALL",
 	"canBeDiscardedByPlayer": true,
 	"canBeSoldInBulkAction": false,

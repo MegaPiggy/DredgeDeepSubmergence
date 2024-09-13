@@ -18,6 +18,7 @@
 		"XXXX"
 	],
 	"itemType": "EQUIPMENT",
+	"itemSubtype": "PRESSURE_VESSEL",
 	"moveMode": "INSTALL",
 	"canBeDiscardedByPlayer": true,
 	"canBeSoldInBulkAction": false,

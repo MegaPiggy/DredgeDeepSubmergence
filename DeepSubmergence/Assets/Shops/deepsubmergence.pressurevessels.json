@@ -1,0 +1,4 @@
+﻿{
+    "gridKey": "SEA_BASE_PRESSURE_VESSELS",
+    "alwaysInStock": [ "deepsubmergence.pressurevesseltier1", "deepsubmergence.pressurevesseltier2", "deepsubmergence.pressurevesseltier3" ]
+}

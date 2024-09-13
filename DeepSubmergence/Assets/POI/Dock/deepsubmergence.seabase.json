@@ -1,5 +1,6 @@
 {
 	"dockData": "deepsubmergence.seabase",
+	"mapMarkerData": "deepsubmergence.seabase",
 	"location": {
 		"x": 730.89,
 		"y": 0,
@@ -21,9 +22,60 @@
 		"z": 0
 	},
 	"storage": {
-		"enabled": false
+		"enabled": true,
+		"position": {
+			"x": 1.85,
+			"y": -3.5,
+			"z": 0.25
+		},
+		"vCam": {
+			"x": -2,
+			"y": 12.5,
+			"z": -8
+		},
+		"isIndoors": true,
+		"hasChest": false,
+		"hasBoxes": false
 	},
-	"destinations": [],
+	"shipyards": [
+		{
+			"id": "deepsubmergence.seabaseshop",
+			"titleKey": "deepsubmergence.seabaseshop",
+			"alwaysShow": false,
+			"isIndoors": true,
+			"speakerData": "deepsubmergence.diver",
+			"speakerRootNodeOverride": "DeepSubmergence_Diver_Shop",
+			"position": {
+				"x": 7.4,
+				"y": -3.5,
+				"z": 0.35
+			},
+			"vCam": {
+				"x": -2,
+				"y": 12.5,
+				"z": -8
+			},
+			"itemTypesBought": "EQUIPMENT",
+			"itemSubtypesBought": [ "PUMP", "PRESSURE_VESSEL" ],
+			"allowSellIfGridFull": true,
+			"marketTabs": [
+				{
+					"gridKey": "SEA_BASE_PUMPS",
+					"tabSprite": "EmptyIcon",
+					"titleKey": "deepsubmergence.pumps",
+					"isUnlockedBasedOnDialogue": false,
+					"unlockDialogueNodes": []
+				},
+				{
+					"gridKey": "SEA_BASE_PRESSURE_VESSELS",
+					"tabSprite": "EmptyIcon",
+					"titleKey": "deepsubmergence.pressurevessels",
+					"isUnlockedBasedOnDialogue": false,
+					"unlockDialogueNodes": []
+				}
+			]
+		}
+	],
 	"dockSlots": [
 		{
 			"position": {

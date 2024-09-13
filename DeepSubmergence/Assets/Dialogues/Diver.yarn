@@ -43,6 +43,7 @@ deepsubmergence.diver: ... #line:deepsubmergence.chatdialogue0
 ===
 ﻿title: DeepSubmergence_Diver_Quest0
 ---
+<<LogWarn "Diver Quest0">>
 <<SetSpeakerAvailability deepsubmergence.diver true>>
 deepsubmergence.diver: Ah... what ill fate dragged you to these depths, to this... place? #aah #line:deepsubmergence.quest0dialogue0
 deepsubmergence.diver: But, no matter. I need something from you. A favor, if you will. #line:deepsubmergence.quest0dialogue1
@@ -53,6 +54,8 @@ deepsubmergence.diver: Keep them... close... until you bring them to me. Return 
 ===
 ﻿title: DeepSubmergence_Diver_Quest1
 ---
+<<LogWarn "Diver Quest1">>
+<<SetDestinationAvailable deepsubmergence.seabaseshop true>>
 deepsubmergence.diver: That's... that's them. You-you found them. But how did...? #line:deepsubmergence.quest1dialogue0
 deepsubmergence.diver: When they... when they sent me down here, I was... elated. So elated. They'd given me... everything I wanted #line:deepsubmergence.quest1dialogue1
 deepsubmergence.diver: Free reign... to test... to discover... to create... #line:deepsubmergence.quest1dialogue2
@@ -87,4 +90,7 @@ deepsubmergence.diver: A bleached machine to cut and break through. Gnawing at t
 deepsubmergence.diver: ... #line:deepsubmergence.questdonedialogue0
 <<wait 1>>
 deepsubmergence.diver: The corpse twitches and siezes, like machinery. Was it ever even alive? #line:deepsubmergence.questdonedialogue1
+===
+﻿title: DeepSubmergence_Diver_Shop
+---
 ===
