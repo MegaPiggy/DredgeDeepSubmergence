@@ -32,7 +32,6 @@ namespace DeepSubmergence {
                     GameObject child = parent.transform.GetChild(i).gameObject;
                     
                     if(child.name.Contains(CUSTOM_HARVESTABLE_IDENTIFIER)){
-                        Destroy(child.GetComponent<Cullable>());
                         allCustomHarvestables.Add(child);
                     }
                 }

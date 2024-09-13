@@ -10,9 +10,6 @@
     "maxStock": 7,
     "doesRestock": true,
     "usesTimeSpecificStock": false,
-    "overrideDefaultDaySpecialChance": true,
-    "overriddenDaytimeSpecialChance": 0.5,
-    "overrideDefaultNightSpecialChance": true,
-    "overriddenNighttimeSpecialChance": 0.5,
     "harvestDifficulty": "Easy",
+    "cullable": false
 }
