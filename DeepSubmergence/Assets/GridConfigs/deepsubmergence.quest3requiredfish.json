@@ -1,0 +1,35 @@
+{
+    "columns": 6,
+    "rows": 3,
+    "cellGroupConfigs": [
+        {
+            "cells": [
+                "  XXXX",
+                "      ",
+                "X    X"
+            ],
+            "itemType": "NONE",
+            "itemSubtype": "NONE",
+            "isHidden": true,
+            "damageImmune": true
+        },
+        {
+            "cells": [
+                "XX    ",
+                "XXXXXX",
+                " XXXX "
+            ],
+            "itemType": "GENERAL",
+            "itemSubtype": "FISH",
+            "isHidden": false,
+            "damageImmune": false
+        }
+    ],
+    "mainItemData": "deepsubmergence.fishtrenchwhale",
+    "mainItemType": "GENERAL",
+    "mainItemSubtype": "FISH",
+    "itemsInThisBelongToPlayer": false,
+    "canAddItemsInQuestMode": true,
+    "hasUnderlay": false,
+    "gridKey": "HOLLOW_DIVER_QUEST3"
+}

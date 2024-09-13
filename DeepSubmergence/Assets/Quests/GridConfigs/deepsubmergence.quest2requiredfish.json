@@ -1,0 +1,50 @@
+{
+    "titleString": "deepsubmergence.quest2requiredfish",
+    "isSaved": true,
+    "allowManualExit": true,
+    "allowStorageAccess": true,
+    "gridConfiguration": "deepsubmergence.quest2requiredfish",
+    "gridKey": "HOLLOW_DIVER_QUEST2",
+    "presetGrid": {
+        "spatialItems": [
+            {
+                "id": "deepsubmergence.fishsteelhead",
+                "x": 4,
+                "y": 2,
+                "z": 180
+            },
+            {
+                "id": "deepsubmergence.fishtorpedofish",
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "id": "deepsubmergence.fishshreddershark",
+                "x": 0,
+                "y": 2,
+                "z": 0
+            }
+        ]
+    },
+    "presetGridMode": "MYSTERY",
+    "questGridExitMode": "REVISITABLE",
+    "startingDurabilityProportion": 1.0,
+    "completeConditions": [
+        {
+            "type": "ItemCount",
+            "item": "deepsubmergence.fishsteelhead",
+            "count": 1
+        },
+        {
+            "type": "ItemCount",
+            "item": "deepsubmergence.fishtorpedofish",
+            "count": 1
+        },
+        {
+            "type": "ItemCount",
+            "item": "deepsubmergence.fishshreddershark",
+            "count": 1
+        }
+    ]
+}

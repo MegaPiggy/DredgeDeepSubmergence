@@ -1,0 +1,50 @@
+{
+    "titleString": "deepsubmergence.quest0requiredfish",
+    "isSaved": true,
+    "allowManualExit": true,
+    "allowStorageAccess": true,
+    "gridConfiguration": "deepsubmergence.quest0requiredfish",
+    "gridKey": "HOLLOW_DIVER_QUEST0",
+    "presetGrid": {
+        "spatialItems": [
+            {
+                "id": "deepsubmergence.fishboltfish",
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "id": "deepsubmergence.fishnetsquid",
+                "x": 2,
+                "y": 2,
+                "z": 180
+            },
+            {
+                "id": "deepsubmergence.fishshoal",
+                "x": 3,
+                "y": 0,
+                "z": 0
+            }
+        ]
+    },
+    "presetGridMode": "MYSTERY",
+    "questGridExitMode": "REVISITABLE",
+    "startingDurabilityProportion": 1.0,
+    "completeConditions": [
+        {
+            "type": "ItemCount",
+            "item": "deepsubmergence.fishboltfish",
+            "count": 1
+        },
+        {
+            "type": "ItemCount",
+            "item": "deepsubmergence.fishnetsquid",
+            "count": 1
+        },
+        {
+            "type": "ItemCount",
+            "item": "deepsubmergence.fishshoal",
+            "count": 1
+        }
+    ]
+}

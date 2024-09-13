@@ -8,20 +8,20 @@
 		{
 			"portraitSprite": "deepsubmergence.uidiver1",
 			"useManualState": true,
-			"stateName": "deepsubmergence.diver.portrait-state",
-			"stateValue": 1
+			"stateName": "deepsubmergence.questprogress",
+			"stateValue": 2
 		},
 		{
 			"portraitSprite": "deepsubmergence.uidiver2",
 			"useManualState": true,
-			"stateName": "deepsubmergence.diver.portrait-state",
-			"stateValue": 2
+			"stateName": "deepsubmergence.questprogress",
+			"stateValue": 3
 		},
 		{
 			"portraitSprite": "deepsubmergence.uidiver3",
 			"useManualState": true,
-			"stateName": "deepsubmergence.diver.portrait-state",
-			"stateValue": 3
+			"stateName": "deepsubmergence.questprogress",
+			"stateValue": 4
 		}
 	]
 }

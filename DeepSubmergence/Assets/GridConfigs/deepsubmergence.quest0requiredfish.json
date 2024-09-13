@@ -1,0 +1,34 @@
+{
+    "columns": 8,
+    "rows": 3,
+    "cellGroupConfigs": [
+        {
+            "cells": [
+                "      XX",
+                "        ",
+                "X  XX XX"
+            ],
+            "itemType": "NONE",
+            "itemSubtype": "NONE",
+            "isHidden": true,
+            "damageImmune": true
+        },
+        {
+            "cells": [
+                "XXXXXX  ",
+                "XXXXXXXX",
+                " XX  X  "
+            ],
+            "itemType": "GENERAL",
+            "itemSubtype": "FISH",
+            "isHidden": false,
+            "damageImmune": false
+        }
+    ],
+    "mainItemType": "GENERAL",
+    "mainItemSubtype": "FISH",
+    "itemsInThisBelongToPlayer": false,
+    "canAddItemsInQuestMode": true,
+    "hasUnderlay": false,
+    "gridKey": "HOLLOW_DIVER_QUEST0"
+}
