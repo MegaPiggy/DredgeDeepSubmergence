@@ -82,6 +82,7 @@ namespace DeepSubmergence {
         
         private List<PumpData> activePumps = new();
         private Vector3 diveTargetPosition;
+        private Collider diveTargetCollider;
         private List<GameObject> boatModelProxies;
         
         private Timer disableTimer = new(DISABLE_MODELS_TIME);
@@ -217,57 +218,85 @@ namespace DeepSubmergence {
         private void UpdateInputs(){
             CannotDiveReason cannotDiveReason = Utils.CanDive();
             
-            if((cannotDiveReason & CannotDiveReason.InDock) != CannotDiveReason.None){
-                onSurface = true;
+            if((cannotDiveReason & CannotDiveReason.InDock) != CannotDiveReason.None && !OnSurface())
+            {
+                ForceSurface();
             } else if(cannotDiveReason == CannotDiveReason.None){
                 if(Input.GetKeyDown(KeyCode.Q)){
-                    onSurface = !onSurface;
+                    ToggleSurface();
                 }
                 
                 moveKeyPressed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
             }
         }
-        
+
+        private static RaycastHit[] RaycastAll(Vector3 position) =>
+            Physics.RaycastAll(
+                new Ray(position, -Vector3.up),
+                20.0f,
+                Physics.DefaultRaycastLayers,
+                QueryTriggerInteraction.UseGlobal
+            );
+
         private void UpdatePositionAndRotation(){
             // Racyast to find seafloor for diving
             Vector3 dredgePlayerPosition = GameManager.Instance.Player.transform.position;
-            
-            RaycastHit[] allRaycastHits = Physics.RaycastAll(
-                new Ray(dredgePlayerPosition, -Vector3.up), 
-                20.0f, 
-                Physics.DefaultRaycastLayers, 
-                QueryTriggerInteraction.UseGlobal
-            );
-            
-            if(allRaycastHits != null){
-                if(allRaycastHits.Length > 0){
-                    for(int i = 0, count = allRaycastHits.Length; i < count; ++i){
-                        // We can't catch everything (partly because not everything has a collider) but this get most things
-                        
-                        bool shouldCollide = allRaycastHits[i].collider.gameObject.name == "Terrain"
-                                             || allRaycastHits[i].collider.gameObject.name.Contains("Rock")
-                                             || allRaycastHits[i].collider.gameObject.layer == LayerMask.NameToLayer("CollidesWithPlayer");
+            Vector3 dredgePlayerForward = GameManager.Instance.Player.transform.forward;
+            Quaternion dredgePlayerRotation = Quaternion.LookRotation(dredgePlayerForward);
 
-                        if(shouldCollide){
-                            Vector3 toDivePosition = (allRaycastHits[i].point + Vector3.up * DIVE_ABOVE_FLOOR) - dredgePlayerPosition;
-                            diveTargetPosition = dredgePlayerPosition + toDivePosition.normalized * Mathf.Min(toDivePosition.magnitude, MAX_DIVE_DISTANCE);
-                            break;
+            diveTargetPosition = dredgePlayerPosition + (Vector3.up * -1.0f * MAX_DIVE_DISTANCE);
+            diveTargetCollider = null;
+
+            bool onSurface = OnSurface();
+
+            // Drive the parameter towards the target when relevant
+            float previousDepthParameter = depthParameter;
+            depthParameter = Mathf.SmoothDamp(depthParameter, onSurface ? 0.0f : 1.0f, ref depthVelocity, DIVE_TIME);
+            bool diving = previousDepthParameter > depthParameter && depthParameter > 0.02f && depthParameter < 0.98f;
+            bool surfacing = previousDepthParameter < depthParameter && depthParameter > 0.02f && depthParameter < 0.98f;
+
+            if (!onSurface || diving || surfacing)
+            {
+                RaycastHit[] allRaycastHits = RaycastAll(dredgePlayerPosition) // Middle
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * 1.5f))) // Front
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * 1.125f)))
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * 0.75f)))
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * 0.375f)))
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * -0.75f)))
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * -1.5f))) // Back
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * -1.875f))) // Propeller Front
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * -2.25f)))
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * -2.625f)))
+                    .Concat(RaycastAll(dredgePlayerPosition + (dredgePlayerForward * -2.75f))) // Propeller Back
+                    .ToArray();
+
+                if (allRaycastHits != null && allRaycastHits.Length > 0)
+                {
+                    foreach (var raycastHit in allRaycastHits)
+                    {
+                        // We can't catch everything (partly because not everything has a collider) but this get most things
+
+                        bool shouldCollide = raycastHit.collider.gameObject.name == "Terrain"
+                                             || raycastHit.collider.gameObject.name.Contains("Rock")
+                                             || raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("CollidesWithPlayer");
+
+                        if (shouldCollide)
+                        {
+                            Vector3 toDivePosition = (raycastHit.point + Vector3.up * DIVE_ABOVE_FLOOR) - dredgePlayerPosition;
+                            var targetPosition = dredgePlayerPosition + (toDivePosition.normalized * Mathf.Min(toDivePosition.magnitude, MAX_DIVE_DISTANCE));
+                            if (targetPosition.y > diveTargetPosition.y)
+                            {
+                                diveTargetPosition = targetPosition;
+                                diveTargetCollider = raycastHit.collider;
+                            }
                         }
                     }
-                } else {
-                    diveTargetPosition = dredgePlayerPosition + (Vector3.up * -1.0f) * MAX_DIVE_DISTANCE;
                 }
             }
             
             // Always be under the player
             diveTargetPosition.x = dredgePlayerPosition.x;
             diveTargetPosition.z = dredgePlayerPosition.z;
-            
-            // Drive the parameter towards the target when relevant
-            float previousDepthParameter = depthParameter;
-            depthParameter = Mathf.SmoothDamp(depthParameter, onSurface ? 0.0f : 1.0f, ref depthVelocity, DIVE_TIME);
-            bool diving = previousDepthParameter > depthParameter && depthParameter > 0.02f && depthParameter < 0.98f;
-            bool surfacing = previousDepthParameter < depthParameter && depthParameter > 0.02f && depthParameter < 0.98f;
             
             // Apply the position based on parameter
             Vector3 previousPosition = transform.position;
@@ -278,7 +307,6 @@ namespace DeepSubmergence {
             );
             
             //  Pitch the submarine model when it's diving/surfacing for fun visuals
-            Quaternion baseRotation = Quaternion.LookRotation(GameManager.Instance.Player.transform.forward);
             float distanceFromMidpoint = 1.0f - (Mathf.Abs(depthParameter - 0.5f) * 2.0f);
             float targetPitch = 0.0f;
             
@@ -289,12 +317,12 @@ namespace DeepSubmergence {
             }
             pitch = Mathf.SmoothDamp(pitch, targetPitch, ref pitchVelocity, DIVE_ROTATION_TIME);
             
-            transform.rotation = baseRotation * Quaternion.Euler(pitch, 0.0f, 0.0f);
+            transform.rotation = dredgePlayerRotation * Quaternion.Euler(pitch, 0.0f, 0.0f);
             
             // If we're high enough up anyway, just be surfaced
             bool visuallySurfacing = previousPosition.y < transform.position.y;
             if(!onSurface && visuallySurfacing && diveTargetPosition.y > dredgePlayerPosition.y - SURFACE_THRESHOLD){
-                onSurface = true;
+                ForceSurface();
             }
             
             // Enable foam particles near surface, disable when dived far enough
@@ -318,7 +346,7 @@ namespace DeepSubmergence {
                 doneFishingTimer.Start();
             }
             
-            if(onSurface){
+            if(OnSurface()){
                 currentDiveTime = Mathf.Max(currentDiveTime - (Time.deltaTime * SURFACE_FILL_RATE), 0.0f);
             } else if(doneFishingTimer.Finished()){
                 currentDiveTime += Time.deltaTime;
@@ -332,7 +360,7 @@ namespace DeepSubmergence {
                 cachedBubbleParticlesCopy.Emit(50);
 
                 // Force surfacing
-                onSurface = true;
+                ForceSurface();
                 
                 // Give player several floodwaters
                 for(int i = 0, count = (int) UnityEngine.Random.Range(WATER_DAMAGE_RANGE.x, WATER_DAMAGE_RANGE.y); i < count; ++i){
@@ -365,6 +393,10 @@ namespace DeepSubmergence {
             return onSurface;
         }
         
+        public void ToggleSurface(){
+            onSurface = !onSurface;
+        }
+
         public void ForceSurface(){
             onSurface = true;
         }
