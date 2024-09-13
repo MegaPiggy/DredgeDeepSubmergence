@@ -119,7 +119,11 @@ namespace DeepSubmergence {
                 playerLight.intensity = LIGHT_INTENSITY;
                 playerLight.spotAngle = LIGHT_ANGLE;
                 playerLight.range = LIGHT_RANGE;
-                
+                var fixedPlayerLight = newLight.AddComponent<FixedPlayerLight>();
+                fixedPlayerLight.light = playerLight;
+                fixedPlayerLight.respondToAdvancedLightsAbility = true;
+                fixedPlayerLight.lumensIntensityCoefficient = 0.02f;
+
                 newLight.transform.parent = transform;
                 newLight.transform.localPosition = LIGHT_POSITION_OFFSET;
                 
