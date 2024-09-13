@@ -326,6 +326,7 @@ namespace DeepSubmergence {
             // If we're high enough up anyway, just be surfaced
             bool visuallySurfacing = previousPosition.y < transform.position.y;
             if(!onSurface && visuallySurfacing && diveTargetPosition.y > dredgePlayerPosition.y - SURFACE_THRESHOLD){
+                WinchCore.Log.Debug("we're high enough up anyway, just be surfaced");
                 ForceSurface();
             }
             
@@ -358,6 +359,7 @@ namespace DeepSubmergence {
             
             // Stayed down too long
             if(currentDiveTime > cachedDiveTimeMax){
+                WinchCore.Log.Debug("Stayed down too long");
                 GameManager.Instance.Player.OnCollision();
                 
                 cachedBubbleParticlesCopy.transform.position = transform.position;
@@ -398,10 +400,12 @@ namespace DeepSubmergence {
         }
         
         public void ToggleSurface(){
+            WinchCore.Log.Debug($"ToggleSurface");
             onSurface = !onSurface;
         }
 
         public void ForceSurface(){
+            WinchCore.Log.Debug($"ForceSurface");
             onSurface = true;
         }
         
