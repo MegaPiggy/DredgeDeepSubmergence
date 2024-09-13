@@ -77,24 +77,24 @@ namespace DeepSubmergence {
 
         public static void Initialize()
         {
-            DredgeEvent.DialogueRunnerLoaded += OnDialogueRunnerLoaded;
+            DredgeEvent.OnDialogueRunnerLoaded += OnDialogueRunnerLoaded;
         }
 
-        private static void OnDialogueRunnerLoaded(DredgeDialogueRunner dialogueRunner, EventArgs _)
+        private static void OnDialogueRunnerLoaded(DredgeDialogueRunner dialogueRunner)
         {
-            dialogueRunner.AddFunction("GetDeepSubmergenceProgress", dialogueRunner.GetDeepSubmergenceProgress);
-            dialogueRunner.AddCommandHandler("IncrementDeepSubmergenceProgress", dialogueRunner.IncrementDeepSubmergenceProgress);
-            dialogueRunner.AddCommandHandler("UpdateDeepSubmergenceProgress", dialogueRunner.UpdateDeepSubmergenceProgress);
+            dialogueRunner.AddFunction("GetDeepSubmergenceProgress", GetDeepSubmergenceProgress);
+            dialogueRunner.AddCommandHandler("IncrementDeepSubmergenceProgress", IncrementDeepSubmergenceProgress);
+            dialogueRunner.AddCommandHandler("UpdateDeepSubmergenceProgress", UpdateDeepSubmergenceProgress);
         }
 
-        private static int GetDeepSubmergenceProgress(this DredgeDialogueRunner dialogueRunner) => dialogueRunner.GetIntVariable(PROGRESSION_SAVE_KEY);
+        private static int GetDeepSubmergenceProgress() => GameManager.Instance.DialogueRunner.GetIntVariable(PROGRESSION_SAVE_KEY);
 
-        private static void IncrementDeepSubmergenceProgress(this DredgeDialogueRunner dialogueRunner) => dialogueRunner.AdjustIntVariable(PROGRESSION_SAVE_KEY, 1);
+        private static void IncrementDeepSubmergenceProgress() => GameManager.Instance.DialogueRunner.AdjustIntVariable(PROGRESSION_SAVE_KEY, 1);
 
-        private static void UpdateDeepSubmergenceProgress(this DredgeDialogueRunner dialogueRunner)
+        private static void UpdateDeepSubmergenceProgress()
         {
 			// Check for progression
-			string[] requiredFish = GetRequiredFishListForProgressLevel(dialogueRunner.GetDeepSubmergenceProgress());
+			string[] requiredFish = GetRequiredFishListForProgressLevel(GetDeepSubmergenceProgress());
 
 			if (requiredFish != null)
 			{
@@ -106,7 +106,7 @@ namespace DeepSubmergence {
 
 				if (hasAllRequiredFish)
 				{
-                    dialogueRunner.IncrementDeepSubmergenceProgress();
+                    IncrementDeepSubmergenceProgress();
 
 					// Take the fish
 					for (int i = 0, count = requiredFish.Length; i < count; ++i)

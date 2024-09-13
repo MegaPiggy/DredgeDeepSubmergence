@@ -343,14 +343,5 @@ namespace DeepSubmergence {
                 }
             }
         }
-        //######################################################################
-        private static int previousFilledCells;
-        public static bool CargoChanged()
-        {
-            int filledCells = GameManager.Instance.SaveData.Inventory.GetFilledCells(ItemSubtype.ALL);
-            bool changed = filledCells != previousFilledCells;
-            previousFilledCells = filledCells;
-            return changed;
-        }
     }
 }

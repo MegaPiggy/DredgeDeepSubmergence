@@ -36,7 +36,6 @@ namespace DeepSubmergence {
 
         public static readonly string AssetsPath = ModAssembly.AssetsPath;
 
-        public GameObject dredgePlayer;
         public GameObject submarinePlayer;
         public GameObject submarineUI;
         public GameObject underwaterFishableManager;
@@ -52,21 +51,27 @@ namespace DeepSubmergence {
             base.Awake();
             WinchCore.Log.Debug("mod loaded");
 
-            SeaBaseDock.Initialize();
-            ModelUtil.Initialize();
-        }
-        
-        IEnumerator Start(){
-            
-            setup = false;
-            
-            // spin until we find a player
-            while(dredgePlayer == null){
-                yield return null;
-                dredgePlayer = GameObject.Find("Player");
-            }
+            ApplicationEvents.Instance.OnGameLoaded += OnGameLoaded;
+            GameManager.Instance.OnGameStarted += OnGameStarted;
+            GameManager.Instance.OnGameEnded += OnGameEnded;
 
-            try {
+            try
+            {
+                SeaBaseDock.Initialize();
+                ModelUtil.Initialize();
+            }
+            catch (Exception ex)
+            {
+                WinchCore.Log.Error(ex);
+            }
+        }
+
+        private void OnGameLoaded()
+        {
+            setup = false;
+
+            try
+            {
                 // Instantiate all the objects needed for the mod
                 SetupTravellingMerchant();
                 SetupSubmarinePlayer();
@@ -74,40 +79,48 @@ namespace DeepSubmergence {
                 SetupDiveUI();
                 SetupFishableManager();
                 SetupSeaBase();
-                
+
                 setup = true;
-            } catch (Exception e){
-                WinchCore.Log.Error(e.ToString());
+            }
+            catch (Exception e)
+            {
+                WinchCore.Log.Error(e);
             }
         }
-        
-        void Update(){
+
+        private void OnGameStarted()
+        {
+            GameManager.Instance.SaveData.AddMapMarker("deepsubmergence.seabase", false);
+        }
+
+        private void OnGameEnded()
+        {
+            ShutDown();
+        }
+
+        private void Update(){
             try {
                 if(setup){
-                    if(dredgePlayer == null){
-                        ShutDown();
-                    } else {
-                        // Constantly reset the freshness of deepsubmergence fish to prevent them from rotting
-                        // This is to facilitate quests (i.e. you can always keep them around) but also a bit spooky
-                        List<SpatialItemInstance> inventoryItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.GENERAL);
+                    // Constantly reset the freshness of deepsubmergence fish to prevent them from rotting
+                    // This is to facilitate quests (i.e. you can always keep them around) but also a bit spooky
+                    List<FishItemInstance> inventoryItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<FishItemInstance>(ItemType.GENERAL, ItemSubtype.FISH);
 
-                        for(int i = 0, count = inventoryItems.Count; i < count; ++i){
-                            if(inventoryItems[i].id.Contains("deepsubmergence") && inventoryItems[i] is FishItemInstance fishy){
-                                fishy.freshness = 3.0f; // Max freshness value in game
-                            }
+                    foreach (FishItemInstance inventoryItem in inventoryItems){
+                        if(inventoryItem.id.StartsWith("deepsubmergence")){
+                            inventoryItem.freshness = 3.0f; // Max freshness value in game
                         }
+                    }
 
-                        List<SpatialItemInstance> storageItems = GameManager.Instance.SaveData.Storage.GetAllItemsOfType<SpatialItemInstance>(ItemType.GENERAL);
-
-                        for(int i = 0, count = storageItems.Count; i < count; ++i){
-                            if(storageItems[i].id.Contains("deepsubmergence") && storageItems[i] is FishItemInstance fishy){
-                                fishy.freshness = 3.0f; // Max freshness value in game
-                            }
+                    List<FishItemInstance> storageItems = GameManager.Instance.SaveData.Storage.GetAllItemsOfType<FishItemInstance>(ItemType.GENERAL, ItemSubtype.FISH);
+                    
+                    foreach (FishItemInstance storageItem in storageItems){
+                        if(storageItem.id.StartsWith("deepsubmergence")){
+                            storageItem.freshness = 3.0f; // Max freshness value in game
                         }
                     }
                 }
             } catch (Exception e){
-                WinchCore.Log.Error(e.ToString());
+                WinchCore.Log.Error(e);
             }
         }
 

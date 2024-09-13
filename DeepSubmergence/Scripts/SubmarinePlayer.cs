@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Winch.Core;
 using Winch.Util;
@@ -58,8 +59,6 @@ namespace DeepSubmergence {
             }
         }
         
-        private GameObject cachedDredgePlayer;
-        private Player cachedDredgePlayerPlayer;
         private GameObject propeller;
         
         private MeshRenderer submarineMesh;
@@ -88,12 +87,12 @@ namespace DeepSubmergence {
         private Timer disableTimer = new(DISABLE_MODELS_TIME);
         private Timer teleportTimer = new(TELEPORT_TIME);
         private Timer doneFishingTimer = new(DONE_FISHING_TIME);
-        
-        void Start(){
+
+        private void Start(){
             try {
-                cachedDredgePlayer = DeepSubmergence.Instance.dredgePlayer;
-                cachedDredgePlayerPlayer = cachedDredgePlayer.GetComponent<Player>();
-                
+                OnPlayerStatsChanged();
+                GameEvents.Instance.OnPlayerStatsChanged += OnPlayerStatsChanged;
+
                 submarineMesh = GetComponent<MeshRenderer>();
                 
                 // Set up and dis/enable the right player gameobjects and components to make this all work
@@ -113,8 +112,7 @@ namespace DeepSubmergence {
                 propeller.transform.localPosition = Vector3.zero;
                 
                 // Create and setup ship light
-                GameObject newLight = new GameObject();
-                newLight.name = "[DeepSubmergence] Player light";
+                GameObject newLight = new GameObject("[DeepSubmergence] Player light");
                 playerLight = newLight.AddComponent<Light>();
                 playerLight.type = LightType.Spot;
                 playerLight.intensity = LIGHT_INTENSITY;
@@ -133,8 +131,47 @@ namespace DeepSubmergence {
                 WinchCore.Log.Error(e.ToString());
             }
         }
-        
-        void Update(){
+
+        private void OnDestroy(){
+            try
+            {
+                GameEvents.Instance.OnPlayerStatsChanged -= OnPlayerStatsChanged;
+            }
+            catch (Exception e)
+            {
+                WinchCore.Log.Error(e.ToString());
+            }
+        }
+
+        private void OnPlayerStatsChanged()
+        {
+            try
+            {
+                // Recompute dive time any time cargo changes
+                cachedDiveTimeMax = baseDiveTime;
+
+                List<SpatialItemInstance> pressureVesselItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.EQUIPMENT, Enums.PRESSURE_VESSEL);
+                foreach (var pressureVesselItem in pressureVesselItems)
+                {
+                    cachedDiveTimeMax += Utils.DiveTime(pressureVesselItem.id);
+                }
+
+                // Update active pumps if cargo inventory changed
+                activePumps.Clear();
+
+                List<SpatialItemInstance> pumpItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.EQUIPMENT, Enums.PUMP);
+                foreach (var pumpItem in pumpItems)
+                {
+                    activePumps.Add(new PumpData(pumpItem.id));
+                }
+            }
+            catch (Exception e)
+            {
+                WinchCore.Log.Error(e.ToString());
+            }
+        }
+
+        private void Update(){
             try {
                 // Intermittently disable all the other boat models in case they get activated in other ways
                 if(disableTimer.Finished()){
@@ -193,7 +230,7 @@ namespace DeepSubmergence {
         
         private void UpdatePositionAndRotation(){
             // Racyast to find seafloor for diving
-            Vector3 dredgePlayerPosition = cachedDredgePlayer.transform.position;
+            Vector3 dredgePlayerPosition = GameManager.Instance.Player.transform.position;
             
             RaycastHit[] allRaycastHits = Physics.RaycastAll(
                 new Ray(dredgePlayerPosition, -Vector3.up), 
@@ -241,7 +278,7 @@ namespace DeepSubmergence {
             );
             
             //  Pitch the submarine model when it's diving/surfacing for fun visuals
-            Quaternion baseRotation = Quaternion.LookRotation(cachedDredgePlayer.transform.forward);
+            Quaternion baseRotation = Quaternion.LookRotation(GameManager.Instance.Player.transform.forward);
             float distanceFromMidpoint = 1.0f - (Mathf.Abs(depthParameter - 0.5f) * 2.0f);
             float targetPitch = 0.0f;
             
@@ -274,19 +311,6 @@ namespace DeepSubmergence {
         
         private const float baseDiveTime = 10.0f;
         private void UpdateDiveTime(){
-            // Recompute dive time any time cargo changes
-            if(Utils.CargoChanged()){
-                cachedDiveTimeMax = baseDiveTime;
-                
-                List<SpatialItemInstance> generalItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.GENERAL);
-                
-                for(int i = 0, count = generalItems.Count; i < count; ++i){
-                    if(generalItems[i].id.Contains(ANY_PRESSUREVESSEL_NAME)){
-                        cachedDiveTimeMax += Utils.DiveTime(generalItems[i].id);
-                    }
-                }
-            }
-            
             // Set a timer after it's cleared so you don't get back from fishing at 0 time left
             bool currentlyFishing = Utils.CanDive() != CannotDiveReason.None;
             
@@ -302,7 +326,7 @@ namespace DeepSubmergence {
             
             // Stayed down too long
             if(currentDiveTime > cachedDiveTimeMax){
-                cachedDredgePlayerPlayer.OnCollision();
+                GameManager.Instance.Player.OnCollision();
                 
                 cachedBubbleParticlesCopy.transform.position = transform.position;
                 cachedBubbleParticlesCopy.Emit(50);
@@ -324,19 +348,6 @@ namespace DeepSubmergence {
             if(inDock && !previousInDock){
                 while(Utils.HasItemInCargo(FLOOD_WATER_NAME)){
                     Utils.DestroyItemInCargo(FLOOD_WATER_NAME);
-                }
-            }
-            
-            // Update active pumps if cargo inventory changed
-            if(Utils.CargoChanged()){
-                activePumps.Clear();
-
-                List<SpatialItemInstance> generalItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.GENERAL);
-                
-                for(int i = 0, count = generalItems.Count; i < count; ++i){
-                    if(generalItems[i].id.Contains(ANY_PUMP_NAME)){
-                        activePumps.Add(new PumpData(generalItems[i].id));
-                    }
                 }
             }
             
