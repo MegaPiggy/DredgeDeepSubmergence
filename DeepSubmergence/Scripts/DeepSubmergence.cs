@@ -57,7 +57,6 @@ namespace DeepSubmergence {
 
             try
             {
-                SeaBaseDock.Initialize();
                 ModelUtil.Initialize();
             }
             catch (Exception ex)
