@@ -1,0 +1,10 @@
+{
+    "buildingNameKey": "deepsubmergence.seabaseshop.tier3.name",
+    "buildingDescriptionKey": "deepsubmergence.seabaseshop.tier3.description",
+    "questGridConfig": "deepsubmergence.seabaseshop.tier3",
+    "onRecipeShownDialogueNodeName": "DeepSubmergence_Diver_Shop_Tier3_Description",
+    "onRecipeBuiltDialogueNodeName": "DeepSubmergence_Diver_Shop_Tier3_Constructed",
+    "cost": 0,
+    "researchRequired": 0,
+    "quantityProduced": 1
+}

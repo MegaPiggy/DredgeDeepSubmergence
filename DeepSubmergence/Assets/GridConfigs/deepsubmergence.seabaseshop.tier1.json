@@ -1,0 +1,11 @@
+{
+    "columns": 2,
+    "rows": 2,
+    "mainItemData": "deepsubmergence.blueprint",
+    "mainItemType": "ALL",
+    "mainItemSubtype": "ALL",
+    "itemsInThisBelongToPlayer": false,
+    "canAddItemsInQuestMode": true,
+    "hasUnderlay": false,
+    "gridKey": "SEA_BASE_TIER_1"
+}

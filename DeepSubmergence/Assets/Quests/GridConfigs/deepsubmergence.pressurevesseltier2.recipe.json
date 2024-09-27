@@ -1,0 +1,28 @@
+{
+	"titleString": "quest-grid.deliver-materials",
+	"isSaved": true,
+	"allowManualExit": true,
+	"allowStorageAccess": true,
+	"gridConfiguration": "deepsubmergence.pressurevesseltier2.recipe",
+	"gridKey": "SEA_BASE_PRESSURE_VESSEL_TIER_2_RECIPE",
+	"presetGrid": {
+		"spatialItems": [
+			{
+				"id": "metal",
+				"x": 0,
+				"y": 0,
+				"z": 0
+			}
+		]
+	},
+	"presetGridMode": "SILHOUETTE",
+	"questGridExitMode": "REVISITABLE",
+	"startingDurabilityProportion": 1.0,
+	"completeConditions": [
+		{
+			"type": "ItemCount",
+			"item": "metal",
+			"count": 1
+		}
+	]
+}

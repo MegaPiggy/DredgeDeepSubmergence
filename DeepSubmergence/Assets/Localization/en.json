@@ -39,6 +39,9 @@
     "deepsubmergence.pressurevesseltier3.name": "Double-Hulled Pressure Vessel",
     "deepsubmergence.pressurevesseltier3.desc": "Adds a good deal of time to how long you can remain submerged.",
 
+    "deepsubmergence.blueprint.name": "Blueprints",
+    "deepsubmergence.blueprint.desc": "A paper with a drawing of reinforcements to help remain submerged and a machine that removes flooding water.",
+
     "deepsubmergence.seabase": "Sea Base",
     "deepsubmergence.diver.title": "Hollow Diver",
 
@@ -73,7 +76,14 @@
     "line:deepsubmergence.questdonedialogue0": "...",
     "line:deepsubmergence.questdonedialogue1": "The corpse twitches and siezes, like machinery. Was it ever even alive?",
 
-    "deepsubmergence.seabaseshop": "Shop",
+    "deepsubmergence.seabaseshop": "Construction Yard",
     "deepsubmergence.pumps": "Pumps",
-    "deepsubmergence.pressurevessels": "Pressure Vessels"
+    "deepsubmergence.pressurevessels": "Pressure Vessels",
+
+    "deepsubmergence.seabaseshop.tier1.name": "Tier 1 Construction Yard",
+    "deepsubmergence.seabaseshop.tier1.description": "Low Quality",
+    "deepsubmergence.seabaseshop.tier2.name": "Tier 2 Construction Yard",
+    "deepsubmergence.seabaseshop.tier2.description": "Medium Quality",
+    "deepsubmergence.seabaseshop.tier3.name": "Tier 3 Construction Yard",
+    "deepsubmergence.seabaseshop.tier3.description": "High Quality"
 }

@@ -1,6 +1,7 @@
 <Project>
 	<PropertyGroup>
-		<DredgePath>C:\Program Files (x86)\Steam\steamapps\common\DREDGE</DredgePath>
+		<DredgePath>D:\DREDGE</DredgePath>
+		<DredgeOldPath>C:\Program Files (x86)\Steam\steamapps\common\DREDGE</DredgeOldPath>
 		<OutputPath>$(DredgePath)\Mods\twestpha.DeepSubmergence</OutputPath>
 	</PropertyGroup>
 </Project>

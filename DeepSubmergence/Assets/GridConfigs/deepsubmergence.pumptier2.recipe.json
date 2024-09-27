@@ -1,0 +1,32 @@
+{
+	"columns": 2,
+	"rows": 2,
+	"cellGroupConfigs": [
+		{
+			"cells": [
+				"X ",
+				"  "
+			],
+			"itemType": "NONE",
+			"itemSubtype": "NONE",
+			"isHidden": true,
+			"damageImmune": true
+		},
+		{
+			"cells": [
+				" X",
+				"XX"
+			],
+			"itemType": "GENERAL",
+			"itemSubtype": "MATERIAL",
+			"isHidden": false,
+			"damageImmune": false
+		}
+	],
+	"mainItemType": "GENERAL",
+	"mainItemSubtype": "MATERIAL",
+	"itemsInThisBelongToPlayer": false,
+	"canAddItemsInQuestMode": true,
+	"hasUnderlay": false,
+	"gridKey": "SEA_BASE_PUMP_TIER_2_RECIPE"
+}

@@ -71,7 +71,9 @@ deepsubmergence.diver: Keep them... close... until you bring them to me. Return 
 deepsubmergence.diver: That's... that's them. You-you found them. But how did...? #line:deepsubmergence.quest1dialogue0
 deepsubmergence.diver: When they... when they sent me down here, I was... elated. So elated. They'd given me... everything I wanted #line:deepsubmergence.quest1dialogue1
 deepsubmergence.diver: Free reign... to test... to discover... to create... #line:deepsubmergence.quest1dialogue2
+<<AutoResolveNextLine>>
 deepsubmergence.diver: Take this. Here. Blueprints... for reinforcing your hull. For... for pushing out the water. The water that seeps in when you dive too deep. #line:deepsubmergence.quest1dialogue3
+<<ShowQuestGrid deepsubmergence.questblueprint>>
 deepsubmergence.diver: But... but this isn’t everything. No... no, there’s more. More out there... #line:deepsubmergence.quest1dialogue4
 <<AutoResolveNextLine>>
 deepsubmergence.diver: A wriggling shock... a glowing crawler... a bleeding slice of iron... and a needle’s tip. So sharp... so sharp... #line:deepsubmergence.quest1dialogue5
@@ -85,7 +87,9 @@ deepsubmergence.diver: A wriggling shock... a glowing crawler... a bleeding slic
 ---
 <<SetIntVariable deepsubmergence.questprogress 2>>
 <<ShowPortrait deepsubmergence.diver>>
+<<AutoResolveNextLine>>
 deepsubmergence.diver: Take it. More blueprints. Deeper... always deeper... ever deeper. #line:deepsubmergence.quest2dialogue0
+<<ShowQuestGrid deepsubmergence.questblueprint>>
 deepsubmergence.diver: They warned us, didn’t they? You know, you remember. #line:deepsubmergence.quest2dialogue1
 deepsubmergence.diver: Alone, down here. Alone. No one to watch, to track... to make sure... To check on. #line:deepsubmergence.quest2dialogue2
 deepsubmergence.diver: It was just a thought. A research grant, they said. Research. Endless hours... smearing... into forever. #line:deepsubmergence.quest2dialogue3
@@ -103,7 +107,9 @@ deepsubmergence.diver: A fish with an battered mask. An explosive thing, stitche
 <<SetIntVariable deepsubmergence.questprogress 3>>
 <<ShowPortrait deepsubmergence.diver>>
 deepsubmergence.diver: Yes, yes, these. My children, almost perfect, almost ready for providence. #line:deepsubmergence.quest3dialogue0
+<<AutoResolveNextLine>>
 deepsubmergence.diver: Take these blueprints and dive, deeper. We're so close to touching it. Touching the abyss. #line:deepsubmergence.quest3dialogue1
+<<ShowQuestGrid deepsubmergence.questblueprint>>
 deepsubmergence.diver: The agency, said no, it's not there, it's not under, you CAN'T GO THERE! #line:deepsubmergence.quest3dialogue2
 <<AutoResolveNextLine>>
 deepsubmergence.diver: ... #line:deepsubmergence.quest3dialogue3
@@ -126,4 +132,62 @@ The corpse twitches and siezes, like machinery. Was it ever even alive? #line:de
 ===
 ﻿title: DeepSubmergence_Diver_Shop
 ---
+<<if GetHasVisitedNode("DeepSubmergence_Diver_Shop_Intro") == false>>
+	<<jump DeepSubmergence_Diver_Shop_Intro>>
+<<endif>>
+===
+﻿title: DeepSubmergence_Diver_Shop_Intro
+---
+You walk into an abandoned construction yard full of submarine parts. #line:deepsubmergence:seabaseshop
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier1
+---
+<<AutoResolveNextLine>>
+Tier 1 #line:deepsubmergence:seabaseshoptier1
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier1_Description
+---
+<<if GetIsBuildingTierConstructed("SEA_BASE_TIER_1") == true>>
+	Tier 1 Description #line:deepsubmergence:seabaseshoptier1desc
+<<else>>
+	Tier 1 Unbuilt #line:deepsubmergence:seabaseshoptier1unbuilt
+<<endif>>
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier1_Constructed
+---
+Tier 1 Built #line:deepsubmergence:seabaseshoptier1built
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier2
+---
+<<AutoResolveNextLine>>
+Tier 2 #line:deepsubmergence:seabaseshoptier2
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier2_Description
+---
+<<if GetIsBuildingTierConstructed("SEA_BASE_TIER_2") == true>>
+	Tier 2 Description #line:deepsubmergence:seabaseshoptier2desc
+<<else>>
+	Tier 2 Unbuilt #line:deepsubmergence:seabaseshoptier2unbuilt
+<<endif>>
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier2_Constructed
+---
+Tier 2 Built #line:deepsubmergence:seabaseshoptier2built
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier3
+---
+<<AutoResolveNextLine>>
+Tier 3 #line:deepsubmergence:seabaseshoptier3
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier3_Description
+---
+<<if GetIsBuildingTierConstructed("SEA_BASE_TIER_3") == true>>
+	Tier 3 Description #line:deepsubmergence:seabaseshoptier3desc
+<<else>>
+	Tier 3 Unbuilt #line:deepsubmergence:seabaseshoptier3unbuilt
+<<endif>>
+===
+﻿title: DeepSubmergence_Diver_Shop_Tier3_Constructed
+---
+Tier 3 Built #line:deepsubmergence:seabaseshoptier3built
 ===

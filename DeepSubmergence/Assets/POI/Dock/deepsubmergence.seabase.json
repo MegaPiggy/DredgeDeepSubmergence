@@ -37,7 +37,84 @@
 		"hasChest": false,
 		"hasBoxes": false
 	},
-	"shipyards": [
+	"constructables": [
+		{
+			"id": "deepsubmergence.seabaseshop",
+			"titleKey": "deepsubmergence.seabaseshop",
+			"alwaysShow": false,
+			"isIndoors": true,
+			"speakerData": "deepsubmergence.diver",
+			"speakerRootNodeOverride": "DeepSubmergence_Diver_Shop",
+			"highlightConditions": [
+				{
+					"highlightIfNodesUnvisited": [
+						"DeepSubmergence_Diver_Shop_Intro"
+					]
+				}
+			],
+			"position": {
+				"x": 7.4,
+				"y": -3.5,
+				"z": 0.35
+			},
+			"vCam": {
+				"x": -2,
+				"y": 12.5,
+				"z": -8
+			},
+			"useFixedScreenPosition": true,
+			"screenPosition": {
+				"x": 675,
+				"y": 0
+			},
+			"playerInventoryTabIndexesToShow": [ 0, 1, 3 ],
+			"constructableDestinationData": {
+				"productQuestGrid": "deepsubmergence.seabaseproduct",
+				"tiers": [
+					{
+						"type": "RecipeList",
+						"tierId": "SEA_BASE_TIER_1",
+						"tierNameKey": "tab.tier-1",
+						"viewAfterConstruction": "RECIPE_LIST",
+						"recipeToCreateThis": "deepsubmergence.seabaseshop.tier1",
+						"recipeListStringKey": "deepsubmergence.seabaseshop.tier1.description",
+						"descriptionDialogueNodeName": "DeepSubmergence_Diver_Shop_Tier1",
+						"recipes": [
+							"deepsubmergence.pressurevesseltier1.recipe",
+							"deepsubmergence.pumptier1.recipe"
+						]
+					},
+					{
+						"type": "RecipeList",
+						"tierId": "SEA_BASE_TIER_2",
+						"tierNameKey": "tab.tier-2",
+						"viewAfterConstruction": "RECIPE_LIST",
+						"recipeToCreateThis": "deepsubmergence.seabaseshop.tier2",
+						"recipeListStringKey": "deepsubmergence.seabaseshop.tier2.description",
+						"descriptionDialogueNodeName": "DeepSubmergence_Diver_Shop_Tier2",
+						"recipes": [
+							"deepsubmergence.pressurevesseltier2.recipe",
+							"deepsubmergence.pumptier2.recipe"
+						]
+					},
+					{
+						"type": "RecipeList",
+						"tierId": "SEA_BASE_TIER_3",
+						"tierNameKey": "tab.tier-3",
+						"viewAfterConstruction": "RECIPE_LIST",
+						"recipeToCreateThis": "deepsubmergence.seabaseshop.tier3",
+						"recipeListStringKey": "deepsubmergence.seabaseshop.tier3.description",
+						"descriptionDialogueNodeName": "DeepSubmergence_Diver_Shop_Tier3",
+						"recipes": [
+							"deepsubmergence.pressurevesseltier3.recipe",
+							"deepsubmergence.pumptier3.recipe"
+						]
+					}
+				]
+			}
+		}
+	],
+	/*"shipyards": [
 		{
 			"id": "deepsubmergence.seabaseshop",
 			"titleKey": "deepsubmergence.seabaseshop",
@@ -75,7 +152,7 @@
 				}
 			]
 		}
-	],
+	],*/
 	"dockSlots": [
 		{
 			"position": {

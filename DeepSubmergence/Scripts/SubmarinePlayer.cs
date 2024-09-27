@@ -155,7 +155,7 @@ namespace DeepSubmergence {
                 // Recompute dive time any time cargo changes
                 cachedDiveTimeMax = baseDiveTime;
 
-                List<SpatialItemInstance> pressureVesselItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.EQUIPMENT, Enums.PRESSURE_VESSEL);
+                List<SpatialItemInstance> pressureVesselItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.EQUIPMENT, Enums.ItemSubtypes.PRESSURE_VESSEL);
                 foreach (var pressureVesselItem in pressureVesselItems)
                 {
                     cachedDiveTimeMax += Utils.DiveTime(pressureVesselItem.id);
@@ -164,7 +164,7 @@ namespace DeepSubmergence {
                 // Update active pumps if cargo inventory changed
                 activePumps.Clear();
 
-                List<SpatialItemInstance> pumpItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.EQUIPMENT, Enums.PUMP);
+                List<SpatialItemInstance> pumpItems = GameManager.Instance.SaveData.Inventory.GetAllItemsOfType<SpatialItemInstance>(ItemType.EQUIPMENT, Enums.ItemSubtypes.PUMP);
                 foreach (var pumpItem in pumpItems)
                 {
                     activePumps.Add(new PumpData(pumpItem.id));

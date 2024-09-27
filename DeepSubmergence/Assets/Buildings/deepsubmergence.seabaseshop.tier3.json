@@ -1,0 +1,4 @@
+{
+    "tierId": "SEA_BASE_TIER_3",
+    "dependentTierIds": [ "SEA_BASE_TIER_1", "SEA_BASE_TIER_2" ]
+}

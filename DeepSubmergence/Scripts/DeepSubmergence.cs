@@ -136,17 +136,20 @@ namespace DeepSubmergence {
         private void SetupTravellingMerchant(){
 
             var gridShopJunk = GameManager.Instance.SaveData.GetGridByKey(GridKey.TRAVELLING_MERCHANT_MATERIALS);
-            var gridConfigurationShopJunk = gridShopJunk.gridConfiguration;
-            gridConfigurationShopJunk.mainItemType |= ItemType.EQUIPMENT;
-            gridConfigurationShopJunk.mainItemSubtype |= Enums.PUMP;
-            gridConfigurationShopJunk.mainItemSubtype |= Enums.PRESSURE_VESSEL;
-            gridShopJunk.Init(gridConfigurationShopJunk, false);
+            var gridConfigurationShopJunk = GameManager.Instance.GameConfigData.GetGridConfigForKey(GridKey.TRAVELLING_MERCHANT_MATERIALS);
+            if (gridConfigurationShopJunk != null)
+            {
+                gridConfigurationShopJunk.mainItemType |= ItemType.EQUIPMENT;
+                gridConfigurationShopJunk.mainItemSubtype |= Enums.ItemSubtypes.PUMP;
+                gridConfigurationShopJunk.mainItemSubtype |= Enums.ItemSubtypes.PRESSURE_VESSEL;
+                gridShopJunk.Init(gridConfigurationShopJunk, false);
+            }
             
             var shipyards = DockUtil.GetAllShipyardDestinations().Where(shipyard => shipyard.marketTabs.Any(marketTab => marketTab.gridKey == GridKey.TRAVELLING_MERCHANT_MATERIALS));
             foreach (var shipyard in shipyards)
             {
-                shipyard.itemSubtypesBought |= Enums.PUMP;
-                shipyard.itemSubtypesBought |= Enums.PRESSURE_VESSEL;
+                shipyard.itemSubtypesBought |= Enums.ItemSubtypes.PUMP;
+                shipyard.itemSubtypesBought |= Enums.ItemSubtypes.PRESSURE_VESSEL;
             }
             var shopJunk = ShopUtil.GetShopData("TM_Junk");
             shopJunk.dialogueLinkedShopData.Add(new ShopData.DialogueLinkedShopData

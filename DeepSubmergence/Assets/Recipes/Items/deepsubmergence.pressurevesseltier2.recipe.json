@@ -1,0 +1,7 @@
+{
+	"itemProduced": "deepsubmergence.pressurevesseltier2",
+	"questGridConfig": "deepsubmergence.pressurevesseltier2.recipe",
+	"cost": 50,
+	"researchRequired": 1,
+	"quantityProduced": 1
+}

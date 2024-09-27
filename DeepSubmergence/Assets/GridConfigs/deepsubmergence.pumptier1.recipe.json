@@ -1,0 +1,10 @@
+{
+	"columns": 2,
+	"rows": 2,
+	"mainItemType": "GENERAL",
+	"mainItemSubtype": "MATERIAL",
+	"itemsInThisBelongToPlayer": false,
+	"canAddItemsInQuestMode": true,
+	"hasUnderlay": false,
+	"gridKey": "SEA_BASE_PUMP_TIER_1_RECIPE"
+}

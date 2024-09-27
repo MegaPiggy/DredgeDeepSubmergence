@@ -1,0 +1,18 @@
+﻿{
+	"itemNameKey": "deepsubmergence.blueprint.name",
+	"itemDescriptionKey": "deepsubmergence.blueprint.desc",
+	"sprite": "deepsubmergence.blueprint",
+	"itemColor": {
+		"r": 58,
+		"g": 40,
+		"b": 32,
+		"a": 255
+	},
+	"value": 0,
+	"dimensions": [
+		"XX",
+		"XX"
+	],
+	"damageMode": "NONE"
+}
+

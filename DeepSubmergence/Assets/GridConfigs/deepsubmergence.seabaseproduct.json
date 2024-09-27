@@ -1,0 +1,10 @@
+{
+    "columns": 6,
+    "rows": 7,
+    "mainItemType": "EQUIPMENT",
+    "mainItemSubtype": ["PUMP", "PRESSURE_VESSEL"],
+    "itemsInThisBelongToPlayer": true,
+    "canAddItemsInQuestMode": false,
+    "hasUnderlay": false,
+    "gridKey": "SEA_BASE_PRODUCT"
+}
